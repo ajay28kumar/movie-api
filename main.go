@@ -1,14 +1,14 @@
 package main
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	_ "github.com/lib/pq"
 	uuid "github.com/nu7hatch/gouuid"
 	"log"
 	"net/http"
+	"database/sql"
+	_ "github.com/lib/pq"
 )
 
 type User struct {
@@ -17,7 +17,6 @@ type User struct {
 }
 
 type RegisteredUser struct {
-	ID int `json:"id"`
 	UserId string `json:"userId"`
 	Email string `json:"email"`
 	Password string `json:"password"`
@@ -38,10 +37,10 @@ func logFatal (err error){
 
 const (
 	host     = "localhost"
-	port     = 49904
+	port     = 5432
 	user     = "postgres"
 	password = "9934238755"
-	dbname   = "localhost 1"
+	dbname   = "postgres"
 )
 
 
@@ -49,16 +48,13 @@ func main() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
+	fmt.Println(psqlInfo);
 	db, err := sql.Open("postgres", psqlInfo)
-	if err != nil {
-		panic(err)
-	}
+	logFatal(err)
 	defer db.Close()
 	err = db.Ping()
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(db)
+	logFatal(err)
+	fmt.Println("Successfully connected!")
 	router := mux.NewRouter();
 	router.HandleFunc("/login", doLogin).Methods("POST")
 	router.HandleFunc("/register", createUser).Methods("POST")
