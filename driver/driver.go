@@ -3,9 +3,8 @@ package driver
 import (
 	"database/sql"
 	"fmt"
+	_ "github.com/lib/pq"
 	"log"
-	_"github.com/lib/pq"
-
 )
 
 const (
@@ -18,7 +17,7 @@ const (
 
 var db *sql.DB
 
-func logFatal(err error)  {
+func logFatal(err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,4 +35,3 @@ func ConnectDB() *sql.DB {
 	fmt.Println("Successfully connected to db!")
 	return db
 }
-

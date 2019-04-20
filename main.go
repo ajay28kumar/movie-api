@@ -2,11 +2,11 @@ package main
 
 import (
 	"database/sql"
-	"movie-api/controllers"
-	"movie-api/driver"
 	"fmt"
 	"github.com/gorilla/mux"
 	"log"
+	"movie-api/controllers"
+	"movie-api/driver"
 	"net/http"
 	//"time"
 )
@@ -17,6 +17,7 @@ func logFatal(err error) {
 		log.Fatal(err)
 	}
 }
+
 var db *sql.DB
 
 func main() {

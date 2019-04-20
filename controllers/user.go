@@ -12,7 +12,6 @@ import (
 var registeredUsers []models.RegisteredUser
 
 type Controller struct {
-	
 }
 
 func (c Controller) Signup(db *sql.DB) http.HandlerFunc {
@@ -21,7 +20,7 @@ func (c Controller) Signup(db *sql.DB) http.HandlerFunc {
 		//var error models.Error
 		json.NewDecoder(r.Body).Decode(&user)
 		userRepo := userRepository.UserRepository{}
-		user = userRepo.Signup(db,user)
+		user = userRepo.Signup(db, user)
 		//if err != nil {
 		//	error.Message = "Server error."
 		//	utils.RespondWithError(w, http.StatusInternalServerError, error)
