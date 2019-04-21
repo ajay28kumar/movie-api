@@ -29,7 +29,7 @@ func ConnectDB() *sql.DB {
 		host, port, user, password, dbname)
 	db, err := sql.Open("postgres", psqlInfo)
 	logFatal(err)
-	defer db.Close()
+	//defer db.Close()
 	err = db.Ping()
 	logFatal(err)
 	fmt.Println("Successfully connected to db!")

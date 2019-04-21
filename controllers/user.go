@@ -3,6 +3,8 @@ package controllers
 import (
 	"database/sql"
 	"encoding/json"
+	"golang.org/x/crypto/bcrypt"
+	"log"
 	"movie-api/models"
 	"movie-api/repository/user"
 	"movie-api/utils"
@@ -19,15 +21,16 @@ func (c Controller) Signup(db *sql.DB) http.HandlerFunc {
 		var user models.RegisteredUser
 		//var error models.Error
 		json.NewDecoder(r.Body).Decode(&user)
+		hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
+		if err != nil {
+			log.Fatal(err)
+		}
+		user.Password = string(hash)
 		userRepo := userRepository.UserRepository{}
 		user = userRepo.Signup(db, user)
-		//if err != nil {
-		//	error.Message = "Server error."
-		//	utils.RespondWithError(w, http.StatusInternalServerError, error)
-		//	return
-		//}
+		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 		utils.ResponseJSON(w, user)
-		json.NewEncoder(w).Encode(user)
+		//json.NewEncoder(w).Encode(user)
 	}
 }
