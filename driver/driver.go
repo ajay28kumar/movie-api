@@ -15,8 +15,6 @@ const (
 	dbname   = "postgres"
 )
 
-var db *sql.DB
-
 func logFatal(err error) {
 	if err != nil {
 		log.Fatal(err)

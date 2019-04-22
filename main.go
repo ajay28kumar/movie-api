@@ -10,8 +10,6 @@ import (
 	"net/http"
 )
 
-
-
 func init() {
 	gotenv.Load()
 }

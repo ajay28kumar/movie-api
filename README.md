@@ -1,7 +1,7 @@
 # movie-api
 a sample of movie data using goLang
 
-###installation
+### installation
 1. Install [dep](https://github.com/golang/dep)
 2. Run `dep ensure` in project root directory to install all dependencies
 3. create `.env` folder to set environment
