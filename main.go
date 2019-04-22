@@ -2,20 +2,18 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/subosito/gotenv"
 	"log"
 	"movie-api/controllers"
 	"movie-api/driver"
 	"net/http"
-	//"time"
 )
 
-func logFatal(err error) {
-	if err != nil {
-		fmt.Println("err: ", err)
-		log.Fatal(err)
-	}
+
+
+func init() {
+	gotenv.Load()
 }
 
 var db *sql.DB
