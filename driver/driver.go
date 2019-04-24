@@ -9,11 +9,8 @@ import (
 )
 
 const (
-	//host     = "localhost"
 	port     = 5432
 	user     = "postgres"
-	//password = "9934238755"
-	//dbname   = "postgres"
 )
 
 func logFatal(err error) {
