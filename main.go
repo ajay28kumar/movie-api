@@ -10,12 +10,11 @@ import (
 	"net/http"
 )
 
+
+var db *sql.DB
 func init() {
 	gotenv.Load()
 }
-
-var db *sql.DB
-
 func main() {
 	db = driver.ConnectDB()
 	router := mux.NewRouter()

@@ -5,14 +5,15 @@ import (
 	"fmt"
 	_ "github.com/lib/pq"
 	"log"
+	"os"
 )
 
 const (
-	host     = "localhost"
+	//host     = "localhost"
 	port     = 5432
 	user     = "postgres"
-	password = "Teliax2018"
-	dbname   = "postgres"
+	//password = "9934238755"
+	//dbname   = "postgres"
 )
 
 func logFatal(err error) {
@@ -24,7 +25,7 @@ func logFatal(err error) {
 func ConnectDB() *sql.DB {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+		os.Getenv("HOST"), port,user, os.Getenv("PASSWORD"), os.Getenv("DBNAME"))
 	db, err := sql.Open("postgres", psqlInfo)
 	logFatal(err)
 	//defer db.Close()
