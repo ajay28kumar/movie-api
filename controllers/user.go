@@ -11,14 +11,15 @@ import (
 	"net/http"
 )
 
-var registeredUsers []models.RegisteredUser
+//var users []models.User
 
 type Controller struct {
 }
 
 func (c Controller) Signup(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var user models.RegisteredUser
+		var user models.User
+		var userDetails models.UserDetails
 		//var error models.Error
 		json.NewDecoder(r.Body).Decode(&user)
 		hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
@@ -27,10 +28,10 @@ func (c Controller) Signup(db *sql.DB) http.HandlerFunc {
 		}
 		user.Password = string(hash)
 		userRepo := userRepository.UserRepository{}
-		user = userRepo.Signup(db, user)
+		userDetails = userRepo.Signup(db, user)
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
-		utils.ResponseJSON(w, user)
+		utils.ResponseJSON(w, userDetails)
 		//json.NewEncoder(w).Encode(user)
 	}
 }

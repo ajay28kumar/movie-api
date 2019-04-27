@@ -20,7 +20,7 @@ func main() {
 	router := mux.NewRouter()
 	controller := controllers.Controller{}
 	//router.HandleFunc("/login", doLogin).Methods("POST")
-	router.HandleFunc("/register", controller.Signup(db)).Methods("POST")
+	router.HandleFunc("/sign-up", controller.Signup(db)).Methods("POST")
 	//router.HandleFunc("/user-details", postUserDetails).Methods("POST")
 	log.Fatalln(http.ListenAndServe(":8000", router))
 }
