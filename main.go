@@ -10,8 +10,8 @@ import (
 	"net/http"
 )
 
-
 var db *sql.DB
+
 func init() {
 	gotenv.Load()
 }

@@ -6,8 +6,8 @@ type User struct {
 }
 
 type UserDetails struct {
-	Email string `json:"email"`
-	ID       int    `json:"id"`
-	UserId   string `json:"userId"`
-	Token string `json:"token"`
+	Email  string `json:"email"`
+	ID     int    `json:"id"`
+	UserId string `json:"userId"`
+	Token  string `json:"token"`
 }

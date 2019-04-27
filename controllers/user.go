@@ -20,8 +20,15 @@ func (c Controller) Signup(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var user models.User
 		var userDetails models.UserDetails
-		//var error models.Error
+		var error models.Error
 		json.NewDecoder(r.Body).Decode(&user)
+		if user.Email == "" || user.Password == "" {
+			error.Message = "Email or Password is missing."
+			error.Code = "INCOMPLETE_DATA"
+			error.Status = 400
+			utils.RespondWithError(w, http.StatusBadRequest, error)
+			return
+		}
 		hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 		if err != nil {
 			log.Fatal(err)

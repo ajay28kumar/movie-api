@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	port     = 5432
-	user     = "postgres"
+	port = 5432
+	user = "postgres"
 )
 
 func logFatal(err error) {
@@ -22,7 +22,7 @@ func logFatal(err error) {
 func ConnectDB() *sql.DB {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
-		os.Getenv("HOST"), port,user, os.Getenv("PASSWORD"), os.Getenv("DBNAME"))
+		os.Getenv("HOST"), port, user, os.Getenv("PASSWORD"), os.Getenv("DBNAME"))
 	db, err := sql.Open("postgres", psqlInfo)
 	logFatal(err)
 	//defer db.Close()

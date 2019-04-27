@@ -13,6 +13,7 @@ a sample of movie data using goLang
         USER="postgres"
         PASSWORD="******"
         DBNAME="postgres"
+        SECRET="movie-tutorial-api"
 ```
 4. Start server `go run main.go`
 
